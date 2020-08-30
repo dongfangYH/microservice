@@ -1,0 +1,25 @@
+server:
+  port: 10000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka
+    register-with-eureka: true
+    fetch-registry: true
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      routes:
+        - id: plainservice
+          uri: lb://PLAINSERVICE
+          predicates:
+            - Path=/demo/**
+          filters:
+            - StripPrefix=1
+            -
