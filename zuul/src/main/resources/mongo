@@ -1,0 +1,17 @@
+docker run --name mongodb -p 27018:27017 -d -v /data/mongodb:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=Aa123456 mongo:4.2.3 --auth --wiredTigerCacheSizeGB 1.5
+docker exec -it mongodb /bin/bash
+mongo -u mongoadmin -p Aa123456 --authenticationDatabase admin
+
+use router
+db.createUser(
+    {
+        user: "router",
+        pwd: "Aa123456",
+        roles:[
+            {
+                role: "dbOwner",
+                db: "router"
+            }
+        ]
+    }
+);
