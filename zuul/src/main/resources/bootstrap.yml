@@ -19,6 +19,10 @@ eureka:
   instance:
     prefer-ip-address: true
 zuul:
+  ribbon:
+    eager-load:
+      # 启用饥饿加载，不必等到有请求时才加载服务信息
+      enabled: true
   routes:
     client-a:
       path: /plain-service/**
