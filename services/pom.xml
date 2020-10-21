@@ -15,6 +15,7 @@
         <module>plainRibbon</module>
         <module>plainService</module>
         <module>feignService</module>
+        <module>resourceService</module>
     </modules>
 
 

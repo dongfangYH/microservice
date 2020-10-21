@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: zuul
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27018
+      database: router
+      username: router
+      password: Aa123456
+server:
+  port: 4444
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    client-a:
+      path: /plain-service/**
+      serviceId: plainService
+      # 去掉请求头的敏感信息
+      sensitiveHeaders: Authorization
+      stripPrefix: true
+    local-client:
+      path: /local/**
+      url: forward:/local
+  add-host-header: true
