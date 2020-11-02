@@ -1,6 +1,6 @@
 package com.example.zuul.config;
 
-import com.example.zuul.filter.AuthFilter;
+import com.example.zuul.filter.GrayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class FilterConfig {
 
     @Bean
-    AuthFilter authFilter(){
-        return new AuthFilter();
+    GrayFilter authFilter(){
+        return new GrayFilter();
     }
 }

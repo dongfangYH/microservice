@@ -34,7 +34,6 @@ public class AuthFilter extends ZuulFilter {
         RequestContext rqt = RequestContext.getCurrentContext();
         String auth = rqt.getRequest().getHeader("Authorization");
         if (!StringUtils.hasText(auth)){
-            //禁止访问下游服务
             rqt.setSendZuulResponse(false);
             rqt.setResponseBody("no auth!");
         }

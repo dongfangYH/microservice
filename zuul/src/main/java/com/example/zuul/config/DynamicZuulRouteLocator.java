@@ -7,7 +7,6 @@ import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties.ZuulRoute;
-import org.springframework.data.domain.Example;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -33,16 +32,28 @@ public class DynamicZuulRouteLocator extends SimpleRouteLocator implements Refre
         this.zuulProperties = properties;
     }
 
+    /**
+     * override the implement of RefreshableRouteLocator, but it actually call SimpleRouteLocator.doRefresh()
+     */
     @Override
     public void refresh() {
         doRefresh();
     }
 
+    /**
+     * override the implement of SimpleRouteLocator which just add route from conf file.
+     * @return
+     */
     @Override
     protected Map<String, ZuulRoute> locateRoutes() {
         LinkedHashMap<String, ZuulRoute> routesMap = new LinkedHashMap<>();
+
+        /** this step is to make sure that we can reserve route rules from conf file. **/
         routesMap.putAll(super.locateRoutes());
+
+        /** add routes that we read from databases. **/
         routesMap.putAll(getDbRoutesMap());
+
         LinkedHashMap<String, ZuulRoute> values = new LinkedHashMap<>();
         routesMap.forEach((k,v) -> {
             String path = checkPath(k);

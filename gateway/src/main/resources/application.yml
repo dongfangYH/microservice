@@ -22,4 +22,3 @@ spring:
             - Path=/demo/**
           filters:
             - StripPrefix=1
-            -

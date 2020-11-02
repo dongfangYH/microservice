@@ -1,6 +1,6 @@
 
-server:
-  port: 9003
+#server:
+#  port: 9003
 #  servlet:
 #    context-path: /plain-service
 eureka:
@@ -10,5 +10,39 @@ eureka:
     register-with-eureka: true
     fetch-registry: false
 spring:
+  profiles:
+    active: dev2
   application:
     name: plainService
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    info:
+      enabled: true
+    health:
+      show-details: always
+---
+
+eureka:
+  instance:
+    metadata-map:
+      host-mark: running-host
+server:
+  port: 9004
+spring:
+  profiles: dev1
+
+---
+
+server:
+  port: 9005
+spring:
+  profiles: dev2
+
+eureka:
+  instance:
+    metadata-map:
+      host-mark: gray-host
