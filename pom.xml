@@ -13,7 +13,6 @@
         <module>services</module>
         <module>gateway</module>
         <module>zuul</module>
-        <module>auth</module>
     </modules>
     <packaging>pom</packaging>
 

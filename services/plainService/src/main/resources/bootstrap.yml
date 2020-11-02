@@ -1,0 +1,27 @@
+#servlet:
+#  context-path: /plainservice
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka
+    register-with-eureka: true
+    fetch-registry: false
+spring:
+  profiles:
+    active: dev2
+  application:
+    name: plainService
+
+---
+
+spring:
+  profiles: dev1
+server:
+  port: 9002
+
+---
+
+spring:
+  profiles: dev2
+server:
+  port: 9003
