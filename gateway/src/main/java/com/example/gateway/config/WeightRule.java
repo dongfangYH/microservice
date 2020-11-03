@@ -28,6 +28,7 @@ public class WeightRule extends AbstractLoadBalancerRule {
 
     private Server chooseByWeight(ILoadBalancer loadBalancer, Object key) {
         List<Server> serverList = loadBalancer.getReachableServers();
+
         serverList = serverList.stream()
                                .filter(p -> p.isReadyToServe())
                                .collect(Collectors.toList());
