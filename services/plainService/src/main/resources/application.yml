@@ -11,7 +11,7 @@ eureka:
     fetch-registry: false
 spring:
   profiles:
-    active: dev2
+    active: dev1
   application:
     name: plainService
 management:
