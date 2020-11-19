@@ -5,3 +5,6 @@ spring:
       label: master
       uri: http://localhost:7001
       name: config-info
+      allow-override: true
+      override-none: true
+      override-system-properties: false

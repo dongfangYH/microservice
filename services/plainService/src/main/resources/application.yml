@@ -14,6 +14,7 @@ spring:
     active: dev1
   application:
     name: plainService
+
 management:
   endpoints:
     web:
@@ -24,6 +25,16 @@ management:
       enabled: true
     health:
       show-details: always
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+
 ---
 
 eureka:
@@ -34,7 +45,23 @@ server:
   port: 9004
 spring:
   profiles: dev1
-
+  aop:
+    proxy-target-class: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Aa123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 100
+      max-lifetime: 10000
+      idle-timeout: 60000
+      connection-timeout: 20000
+      minimum-idle: 10
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ---
 
 server:
